@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::namespace('Admin')->group(function () {
+    // Controllers Within The "App\Http\Controllers\Admin" Namespace
+    Route::resource('stores', 'StoreController');
+});
+
 Route::get('model', function ()
 {
     // Criar categoria para um produto
