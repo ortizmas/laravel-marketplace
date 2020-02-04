@@ -5,7 +5,7 @@
     <div class="container"
         <h1>Atualizar Produto</h1>
 
-        <form action="{{route('products.update', ['product' => $product->id])}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.products.update', ['product' => $product->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             @method("PUT")
 

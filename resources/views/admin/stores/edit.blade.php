@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <h1>Criar Loja</h1>
-        <form action="{{route('stores.update', ['store' => $store->id])}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.stores.update', ['store' => $store->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             @method("PUT")
 

@@ -15,11 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::namespace('Admin')->group(function () {
-    // Controllers Within The "App\Http\Controllers\Admin" Namespace
-    Route::resource('stores', 'StoreController');
-    Route::resource('products', 'ProductController');
-});
+// Route::namespace('Admin')->group(function () {
+//     Route::resource('stores', 'StoreController');
+//     Route::resource('products', 'ProductController');
+// });
 
 Route::get('model', function ()
 {

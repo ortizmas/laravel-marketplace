@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item @if (request()->is('admin/stores')) active @endif">
+                            <a class="nav-link" href="{{ route('admin.stores.index') }}">Loja</a>
+                        </li>
+                        <li class="nav-item @if (request()->is('admin/categories')) active @endif">
+                            <a class="nav-link" href="{{ route('admin.categories.index') }}">Categorias</a>
+                        </li>
+                        <li class="nav-item @if (request()->is('admin/products')) active @endif">
+                            <a class="nav-link" href="{{ route('admin.products.index') }}">Produto</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

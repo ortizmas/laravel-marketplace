@@ -4,7 +4,7 @@
 @section('content')
     <div class="container"
         <h1>Criar Loja</h1>
-        <form action="{{route('stores.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.stores.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Nome Loja</label>
