@@ -23,4 +23,10 @@ class Product extends Model
         // Uma categoria pertece a muitos produtos
         return $this->belongsToMany(Category::class);
     }
+
+    public function photos()
+    {
+        // Ese produto têm varias images
+        return $this->hasMany(ProductPhoto::class);
+    }
 }

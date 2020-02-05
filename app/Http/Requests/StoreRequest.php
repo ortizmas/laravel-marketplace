@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -23,13 +24,14 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        //dd($this->store->id);
         return [
-            //'name' => 'required|min:3|unique:stores,name,' . $this->store->id,
-            'name' => 'required|min:3',
+            'name' => ['required',
+                        'min:3',
+                        Rule::unique('stores')->ignore($this->store)],
             'description' => 'required|min:10',
             'phone' => 'required',
             'mobil_phone' => 'required',
+            'logo' => 'required|image',
         ];
     }
 
@@ -37,7 +39,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'required' => 'Este campo :attribute é obrigatorio',
-            'min' => 'Campo deve ter mínimo :min carateres'
+            'min' => 'Campo deve ter mínimo :min carateres',
+            'image' => 'O :attribute não é uma imagem valida',
         ];
     }
 }

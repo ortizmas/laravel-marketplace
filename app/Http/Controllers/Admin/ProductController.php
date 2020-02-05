@@ -6,10 +6,13 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
+
     private $product;
 
     public function __construct(Product $product)
@@ -19,7 +22,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->product->paginate(10);
+        // Devolve loja pro usuario 
+        $userStore = auth()->user()->store;
+
+        // return products por loja do usuario
+        $products = $userStore->products()->paginate(10);
 
         return view('admin.products.index', compact('products'));
     }
@@ -32,7 +39,9 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
+
         $data = $request->all();
+
         $categories = $request->get('categories', null);
 
         $store = auth()->user()->store;
@@ -40,14 +49,13 @@ class ProductController extends Controller
 
         $product->categories()->sync($categories);
 
-        /*if ($request->hasFile('photos')) {
+        if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
-
             $product->photos()->createMany($images);
-        }*/
+        }
 
         flash('Produto Criado com Sucesso!')->success();
-        return redirect()->route('products.index');
+        return redirect()->route('admin.products.index');
     }
 
     public function edit(Product $product)
@@ -68,11 +76,10 @@ class ProductController extends Controller
         if (!is_null($categories))
             $product->categories()->sync($categories);
 
-        /*if ($request->hasFile('photos')) {
+        if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
-
             $product->photos()->createMany($images);
-        }*/
+        }
 
         flash('Produto Atualizado com Sucesso!')->success();
 
@@ -87,4 +94,5 @@ class ProductController extends Controller
         flash('Produto removido com sucesso!')->success();
         return redirect()->route('admin.products.index');
     }
+
 }

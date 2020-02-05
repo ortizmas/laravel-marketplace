@@ -93,18 +93,18 @@
         <hr>
 
         <div class="row">
-            {{-- @foreach($product->photos as $photo)
-                <div class="col-4 text-center">
+            @foreach($product->photos as $photo)
+                <div class="col-md-2 text-center">
                     <img src="{{asset('storage/' . $photo->image)}}" alt="" class="img-fluid">
 
-                    <form action="{{route('photo.remove')}}" method="post">
+                    <form action="{{route('admin.photo.remove')}}" method="post">
                         @csrf
                         <input type="hidden" name="photoName" value="{{$photo->image}}">
 
                         <button type="submit" class="btn btn-lg btn-danger">REMOVER</button>
                     </form>
                 </div>
-            @endforeach --}}
+            @endforeach
         </div>
     </div>
 @endsection

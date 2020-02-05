@@ -9,7 +9,7 @@ class Store extends Model
     protected $table = 'stores';
 
     protected $fillable = [
-        'name', 'slug', 'description', 'phone', 'mobil_phone'
+        'name', 'slug', 'description', 'phone', 'mobil_phone', 'logo'
     ];
 
     public function user()

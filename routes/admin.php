@@ -8,5 +8,6 @@ Route::middleware('auth')->group( function () {
     Route::resource('products', 'ProductController');
     Route::resource('categories', 'CategoryController');
 
+    Route::post('photo/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
 });
     

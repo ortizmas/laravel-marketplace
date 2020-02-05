@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequest;
 use App\Store;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
 {
+    use UploadTrait;
+
+    public function __construct()
+    {
+        $this->middleware('user.has.store')->only(['create', 'store']);
+    }
+
     public function index()
     {
         $store = auth()->user()->store;
@@ -25,6 +33,7 @@ class StoreController extends Controller
 
     public function create()
     {
+        // Call middleware UserHasStoreNiddleware
         return view('admin.stores.create');
     }
 
@@ -33,9 +42,9 @@ class StoreController extends Controller
         $data = $request->all();
         $user = auth()->user();
 
-        /*if ($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $data['logo'] = $this->imageUpload($request->file('logo'));
-        }*/
+        }
 
         $store = $user->store()->create($data);
 
@@ -77,4 +86,5 @@ class StoreController extends Controller
         flash('Loja removida com sucesso')->success();
         return redirect()->route('admin.stores.index');
     }
+
 }
