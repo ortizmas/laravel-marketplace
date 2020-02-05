@@ -25,14 +25,22 @@ class ProductController extends Controller
         // Devolve loja pro usuario 
         $userStore = auth()->user()->store;
 
-        // return products por loja do usuario
-        $products = $userStore->products()->paginate(10);
+        if ($userStore) {
+            // return products por loja do usuario
+            $products = $userStore->products()->paginate(10);
+        } else {
+            $products = [];
+        }
 
         return view('admin.products.index', compact('products'));
     }
 
     public function create()
     {
+        if (auth()->user()->store()->count() == 0){
+            flash('Você não possui uma loja, click não button para criar sua loja!!')->error();
+            return redirect()->route('admin.stores.index');
+        }
         $categories = Category::all(['id', 'name']);
         return view('admin.products.create', compact('categories'));
     }

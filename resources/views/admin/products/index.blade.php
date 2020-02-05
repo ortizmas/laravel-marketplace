@@ -15,6 +15,7 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach($products as $p)
                 <tr>
                     <td>{{$p->id}}</td>
@@ -33,8 +34,11 @@
                     </td>
                 </tr>
             @endforeach
+            
         </tbody>
     </table>
-
-    {{$products->links()}}
+    @if ($products)
+        {!! $products->links() !!}
+    @endif
+    
 @endsection
