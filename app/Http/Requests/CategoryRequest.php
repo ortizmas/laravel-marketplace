@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
             'name' => ['required',
                         'min:3',
                         Rule::unique('categories')->ignore($this->category)],
-            'slug' => 'required|min:3'
+            
         ];
 
         /*switch ($this->getMethod()) {

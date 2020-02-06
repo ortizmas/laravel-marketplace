@@ -11,9 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/product/{slug}', 'HomeController@single')->name('product.single');
+
+Route::prefix('cart')->name('cart.')->group( function() {
+    Route::get('/', 'CartController@index')->name('index');
+    Route::post('add', 'CartController@add')->name('add');
 });
+
+
+
 
 // Route::namespace('Admin')->group(function () {
 //     Route::resource('stores', 'StoreController');
@@ -32,4 +39,4 @@ Route::get('model', function ()
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');

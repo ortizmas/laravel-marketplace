@@ -18,6 +18,7 @@ class ProductController extends Controller
     public function __construct(Product $product)
     {
         $this->product = $product;
+        $this->middleware('check.user.store')->only(['create', 'store']);
     }
 
     public function index()
@@ -37,10 +38,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        if (auth()->user()->store()->count() == 0){
-            flash('Você não possui uma loja, click não button para criar sua loja!!')->error();
-            return redirect()->route('admin.stores.index');
-        }
+        
         $categories = Category::all(['id', 'name']);
         return view('admin.products.create', compact('categories'));
     }
