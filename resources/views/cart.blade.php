@@ -36,6 +36,7 @@
                                 @endphp
                                 <td>R$ {{ number_format($subtotal, 2, ',', '.') }}</td>
                                 <td>{{ $item['slug'] }}</td>
+                                <td><a href="{{ route('cart.remove', ['slug'=> $item['slug']]) }}" class="btn btn-danger float-right">Remover</a></td>
                             </tr>
                         @endforeach
                         <tr>
@@ -45,6 +46,12 @@
                     @endif
                 </tbody>
             </table>
+            <hr>
+            <div class="col-md-12">
+                <a href="{{ route('checkout.index') }}" class="btn btn-lg btn-success float-right">Concluir compra</a>
+                <a href="{{ route('cart.cancel') }}" class="btn btn-lg btn-danger float-left">Cancelar compra</a>
+
+            </div>
         </div>
     </div>
 </div>

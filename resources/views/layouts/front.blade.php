@@ -34,9 +34,11 @@
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('cart.index') }}" class="nav-link">
                             @if(session()->has('cart'))
                                 <span class="badge badge-danger">{{count(session()->get('cart'))}}</span>
+                                {{-- <span class="badge badge-danger">{{array_sum(array_column(session()->get('cart'), 'amount'))}}</span> --}}
+
                             @endif
                             <i class="fa fa-shopping-cart fa-2x"></i>
                         </a>
@@ -54,6 +56,9 @@
 
     </div>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     @yield('scripts')
 
 </body>
