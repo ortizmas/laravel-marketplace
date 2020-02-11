@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //Registra qualquer serviço da aplicação
     }
 
     /**
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //Inicializa qualquer serviço da aplicação
+        \PagSeguro\Library::initialize();
+        \PagSeguro\Library::cmsVersion()->setName("Marketplace")->setRelease("1.0.0");
+        \PagSeguro\Library::moduleVersion()->setName("Marketplace")->setRelease("1.0.0");
     }
 }
