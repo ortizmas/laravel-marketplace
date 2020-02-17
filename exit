@@ -1,0 +1,78 @@
+[33mcommit c233aa41233b26283892c682c1f302ea92e64663[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Mon Feb 17 08:26:02 2020 -0300
+
+    Comando --amend erro
+
+[33mcommit 6eca33616a644cea6a7e19d46d1a300dd8d49729[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Thu Feb 13 10:52:03 2020 -0300
+
+    Criando novo branch
+
+[33mcommit 05b7db234a8d435c05cfa01906a847cc8023a804[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Tue Feb 11 18:02:55 2020 -0300
+
+    Gerando token pagseguro com javascript
+
+[33mcommit 62d3e93d0947b2289475d9ccf45db1ca1ebb60b0[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Mon Feb 10 18:10:34 2020 -0300
+
+    Concluido session cast
+
+[33mcommit 84d0d779f282a0e79ac3e69d7f71d2a029c71286[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Thu Feb 6 18:01:27 2020 -0300
+
+    Criando session para cart
+
+[33mcommit 12cab954eaf98ecb0976e6487fb7d4cc82a15a62[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Wed Feb 5 18:03:47 2020 -0300
+
+    Implementando middlewares para stores
+
+[33mcommit bd7f5b705f3acc4cabc5252aa8da125eb1943293[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Wed Feb 5 16:49:44 2020 -0300
+
+    Categorias, Produtos e Upload de Fotos
+
+[33mcommit 21a77b82a7f20061d96fe37339e8de290cd44cf4[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Tue Feb 4 18:02:33 2020 -0300
+
+    Validação de dados store e product
+
+[33mcommit 021bc76f43a251cd20813e8817af893925e66774[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Tue Feb 4 12:02:33 2020 -0300
+
+    Crud produtos e uso de laracast/flash
+
+[33mcommit d18c0961d4ff29bd3b1041bbacb3c7d0d3d605c3[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Mon Feb 3 18:12:31 2020 -0300
+
+    Add controllers
+
+[33mcommit 27c405f583a9e3ccfe719b324d69ac7fcef9d31c[m
+Merge: 44abee4 80ee70d
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Mon Feb 3 17:51:11 2020 -0300
+
+    Alter conflict gitignore
+
+[33mcommit 44abee4f9286557d3064074783a1fe55f04237ee[m
+Author: Eber Ortiz <ortizmas14@gmail.com>
+Date:   Mon Feb 3 17:46:24 2020 -0300
+
+    Inicio do projeto
+
+[33mcommit 80ee70d0bb6878c6da477b780cb56b527ebe4782[m
+Author: ortizmas <ortizmas14@gmail.com>
+Date:   Mon Feb 3 17:44:57 2020 -0300
+
+    Initial commit
