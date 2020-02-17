@@ -9,6 +9,7 @@
 
     <div class="col-12">
         <code>git checkout -b soportewebsites</code>
+        <code>git commit -m "Adicionandos arquivos" --amend</code>
     </div>
 </div>
 
