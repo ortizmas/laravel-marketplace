@@ -25,7 +25,12 @@ Route::prefix('cart')->name('cart.')->group( function() {
 
 Route::prefix('checkout')->name('checkout.')->group( function() {
     Route::get('/', 'CheckoutController@index')->name('index');
+
+    Route::get('/confirmar-pedido', 'CheckoutController@confirmOrder')->name('confirm.order');
+    Route::post('/proccess', 'CheckoutController@proccess')->name('proccess');
+
     Route::post('/payment', 'CheckoutController@payment')->name('payment');
+
 });
 
 

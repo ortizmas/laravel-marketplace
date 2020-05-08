@@ -45,56 +45,19 @@
                             <h3 class="text-center">Dados para pagamento</h3>
                         </div>
                         <hr>
-                        <form action="#" method="post" novalidate="novalidate" class="needs-validation">
+                        <form action="{{ route('checkout.proccess') }}" method="post" novalidate="novalidate" class="needs-validation">
                             {{-- {{ route('checkout.payment') }} --}}
-                            {{-- @csrf --}}
+                            @csrf
                             <div class="form-group">
-                                <label for="x_zip" class="control-label mb-1">Nome do Titular</label>
-                                <input id="cc-name" name="card_name" type="text" class="form-control" value="" data-val="true"required data-val-required="Porfavor digite Nome do Titular" autocomplete="Nome do Titular">
+                                <label for="x_zip" class="control-label mb-1">Nome do Cliente</label>
+                                <input id="cc-name" name="name" type="text" class="form-control" value="" data-val="true"required data-val-required="Porfavor digite Nome do Titular" autocomplete="Nome do Titular">
                                 <span class="invalid-feedback">Porfavor digite Nome do Titular</span>
                             </div>
 
                             <div class="form-group">
-                                <label for="cc-number" class="control-label mb-1">Numero do cartão <span class="brand"></span></label>
-                                <input id="cc-number" name="card_number" type="tel" class="form-control cc-number identified visa" required autocomplete="off"  >
+                                <label for="cc-number" class="control-label mb-1">CPF/CPNJ <span class="brand"></span></label>
+                                <input id="cc-number" name="cpf_cpnj" type="tel" class="form-control cc-number identified visa" required autocomplete="off"  >
                                 <span class="invalid-feedback">Digite um número de cartão válido de 12 a 16 dígitos</span>
-                                <input type="hidden" name="card_brand">
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="card_month" class="control-label mb-1">Mês</label>
-                                                <input id="card_month" name="card_month" type="tel" class="form-control cc-exp" required placeholder="MM" autocomplete="card_month">
-                                                <span class="invalid-feedback">Digite o mês valido</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="card_year" class="control-label mb-1">Ano</label>
-                                                <input id="card_year" name="card_year" type="tel" class="form-control cc-exp" required placeholder="YY" autocomplete="card_year">
-                                                <span class="invalid-feedback">Digite o ano validade</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <label for="x_card_code" class="control-label mb-1">CVV</label>
-                                    <div class="input-group">
-                                        <input id="x_card_code" name="card_cvv" type="tel" class="form-control cc-cvc" required autocomplete="off">
-                                        <span class="invalid-feedback order-last">Digite o código de 3 dígitos no verso</span>
-                                        <div class="input-group-append">
-                                            <div class="input-group-text">
-                                            <span class="fa fa-question-circle fa-lg" data-toggle="popover" data-container="body" data-html="true" data-title="CVV" 
-                                            data-content="<div class='text-center one-card'>O código de 3 dígitos na parte de trás do cartão...<div class='visa-mc-cvc-preview'></div></div>"
-                                            data-trigger="hover"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="form-group installments">
@@ -102,15 +65,15 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="x_promotion" class="control-label mb-1">Codigo de promoção</label>
-                                <input id="x_promotion" name="x_prom" type="text" class="form-control" value="" data-val="true" data-val-required="Digite seu codigo de promoção" >
+                                <label for="x_promotion" class="control-label mb-1">Telefone</label>
+                                <input id="x_promotion" name="telefone" type="text" class="form-control" value="" data-val="true" data-val-required="Digite seu codigo de promoção" >
                                 <span class="help-block" data-valmsg-for="x_promotion" data-valmsg-replace="true"></span>
                             </div>
                             
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-dark btn-block processCheckout">
                                     <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                    <span id="payment-button-amount" class="proccessCheckout">Pagar </span>
+                                    <span id="payment-button-amount" class="proccessCheckout">Confirmar </span>
                                     <span id="payment-button-sending" style="display:none;">Enviando…</span>
                                 </button>
                             </div>
@@ -124,110 +87,7 @@
 @endsection
 
 @section('scripts')
-    <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js" type="text/javascript"></script>
     {{-- <script src="{{ asset('js/jquery.ajax.2.1.1.js') }}" type="text/javascript"></script> --}}
-
-    <script>
-        const sessionId = '{{Session::get('pagseguro_session_code')}}';
-        PagSeguroDirectPayment.setSessionId(sessionId);
-    </script>
-
-    <script>
-        let cardNumber = document.querySelector('input[name=card_number');
-        let spanBrand = document.querySelector('span.brand');
-
-        cardNumber.addEventListener('keyup', function(){
-            if (cardNumber.value.length >= 6) {
-                PagSeguroDirectPayment.getBrand({
-                    cardBin: cardNumber.value.substr(0, 6),
-                    success: function(res) {
-                        let imgFlag = `<img src="https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/${res.brand.name}.png">`;
-                        spanBrand.innerHTML = imgFlag;
-                        document.querySelector('input[name=card_brand]').value = res.brand.name;
-                        getInstallments(40, res.brand.name);
-                        //console.log(res);
-                    },
-                    error: function(err){
-                        console.log(err);
-                    },
-                    complete: function(res) {
-                        //console.log('Complete: ', res);
-                    }
-                });
-            }
-        });
-
-        let submitButton = document.querySelector('button.processCheckout');
-
-        submitButton.addEventListener('click', function(event) {
-
-            event.preventDefault();
-
-            PagSeguroDirectPayment.createCardToken({
-                cardNumber:         document.querySelector('input[name=card_number').value,
-                brand:              document.querySelector('input[name=card_brand').value,
-                cvv:                document.querySelector('input[name=card_cvv').value,
-                expirationMonth:    document.querySelector('input[name=card_month').value,
-                expirationYear:     document.querySelector('input[name=card_year').value,
-                success: function(res) {
-                    //console.log(res);
-                    proccessPayment(res.card.token);
-                    
-                }
-            })
-        })
-
-        function proccessPayment(token) {
-            let data = {
-                card_token: token,
-                hash: PagSeguroDirectPayment.getSenderHash(),
-                installments: document.querySelector('select.select_installments').value,
-                _token: '{{csrf_token()}}'
-            }
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('checkout.proccess') }}',
-                data: data,
-                dataType: 'json',
-                success: function(res) {
-                    console.log(res);
-                }
-            });
-        }
-
-        function getInstallments(amount, brand) {
-            PagSeguroDirectPayment.getInstallments({
-                amount: amount,
-                barnd: brand,
-                maxInstallmentNoInter: 3,
-                success: function(res) {
-                    let selectInstallments = drawSelectInstallments(res.installments[brand]);
-                    document.querySelector('div.installments').innerHTML = selectInstallments;
-                    //console.log(res);
-                },
-                error: function(err){
-                    console.log(err);
-                },
-                complete: function(res) {
-                    //console.log('Complete: ', res);
-                }
-            })
-        }
-
-        function drawSelectInstallments(installments) {
-            let select = '<label>Opções de Parcelamento:</label>';
-
-            select += '<select class="form-control select_installments">';
-
-            for(let l of installments) {
-                select += `<option value="${l.quantity}|${l.installmentAmount}">${l.quantity}x de ${l.installmentAmount} - Total fica ${l.totalAmount}</option>`;
-            }
-
-            select += '</select>';
-
-            return select;
-        }
-    </script>
 
     <script>
 
@@ -240,17 +100,17 @@
             
             var form = $(this).parents('form');
             
-            var cvv = $('#x_card_code').val();
-            var regCVV = /^[0-9]{3,4}$/;
+            //var cvv = $('#x_card_code').val();
+            //var regCVV = /^[0-9]{3,4}$/;
             var CardName = $('#cc-name').val();
             var regCardName = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
             var CardNo = $('#cc-number').val();
             var regCardNo = /^[0-9]{12,16}$/;
             //var date = $('#cc-exp').val().split('/');
-            var cardMonth = $('#card_month').val();
+            /*var cardMonth = $('#card_month').val();
             var regMonth = /^01|02|03|04|05|06|07|08|09|10|11|12$/;
             var cardYear = $('#card_year').val();
-            var regYear = /^20|21|22|23|24|25|26|27|28|29|30|31$/;
+            var regYear = /^20|21|22|23|24|25|26|27|28|29|30|31$/;*/
             
             if (form[0].checkValidity() === false) {
             e.preventDefault();
@@ -271,14 +131,14 @@
                 alert(" Enter a valid 12 to 16 card number");
                 return false;
             }
-            else if (!regCVV.test(cvv)) {
+            /*else if (!regCVV.test(cvv)) {
             
                 $("#x_card_code").addClass('required');
                 $("#x_card_code").focus();
                 alert(" Enter a valid CVV");
                 return false;
-            }
-            else if (!regMonth.test(cardMonth)) {
+            }*/
+            /*else if (!regMonth.test(cardMonth)) {
             
                 $("#card_month").addClass('required');
                 $("#card_month").focus();
@@ -291,7 +151,7 @@
                 $("#card_year").focus();
                 alert(" Enter a valid expiration year");
                 return false;
-            }
+            }*/
             // else if (!regMonth.test(date[0]) && !regMonth.test(date[1]) ) {
             
             //     $("#cc_exp").addClass('required');

@@ -37,4 +37,9 @@ class Store extends Model
         // Uma loja têm muitos produtos
         return $this->hasMany(Product::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(UserOrder::class);
+    }
 }

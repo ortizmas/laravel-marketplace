@@ -26,9 +26,9 @@
         <div class="mt-3">
             <form action="{{ route('cart.add') }}" method="post">
                 @csrf
-                <input type="text" name="product[name]" value="{{ $product->name}}">
-                <input type="text" name="product[price]" value="{{ $product->price}}">
-                <input type="text" name="product[slug]" value="{{ $product->slug}}">
+                <input type="hidden" name="product[name]" value="{{ $product->name}}">
+                <input type="hidden" name="product[price]" value="{{ $product->price}}">
+                <input type="hidden" name="product[slug]" value="{{ $product->slug}}">
 
                 <div class="form-group">
                     <label for="qty">Quantidade</label>
