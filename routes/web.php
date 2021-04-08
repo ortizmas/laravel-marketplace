@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +46,7 @@ Route::prefix('checkout')->name('checkout.')->group( function() {
 Route::get('model', function ()
 {
     // Criar categoria para um produto
-    
+
     $category = \App\Category::find(1);
     $product = $category->products()->sync([1, 2, 3]);
 

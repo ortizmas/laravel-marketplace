@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Inicializa qualquer serviço da aplicação
+        Schema::defaultStringLength(191);
         \PagSeguro\Library::initialize();
         \PagSeguro\Library::cmsVersion()->setName("Marketplace")->setRelease("1.0.0");
         \PagSeguro\Library::moduleVersion()->setName("Marketplace")->setRelease("1.0.0");
